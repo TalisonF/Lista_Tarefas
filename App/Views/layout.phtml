@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>App Lista Tarefas</title>
+		<link rel="icon" href="img/logo.png">
+
+		<link rel="stylesheet" href="css/estilo.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+		<script type="text/javascript">
+			function editar(id_tarefa) {
+				//criar o form de edição
+				let form = document.createElement('form');
+				if(window.location.href.indexOf('todastarefas') > -1){ 
+					form.action = 'atualizar'
+				} else { 
+					form.action = 'atualizar?origem=index'
+				}
+				
+				form.method = 'post'
+				form.setAttribute("class", "row")
+				let inputTarefa = document.createElement('input');
+				inputTarefa.setAttribute("class", "col-9 form-control");
+				inputTarefa.type = 'text';
+				inputTarefa.name = 'tarefa';
+				let inputId = document.createElement('input');
+				inputId.name = 'id';
+				inputId.type = 'hidden';
+				inputId.value = id_tarefa;
+				let button = document.createElement('button');
+				button.setAttribute("class", "col-3 btn btn-info");
+				button.type = 'submit';
+				button.innerHTML = 'Atualizar'
+				let tarefa = document.getElementById('tarefa_' + id_tarefa)
+				let valortarefa = tarefa.innerHTML;
+				valortarefa = valortarefa.replace('(Pendente)' , '')
+				valortarefa = valortarefa.trim()
+				tarefa.innerHTML= ''
+				inputTarefa.value = valortarefa;
+				form.appendChild(inputTarefa);
+				form.appendChild(inputId);
+				form.appendChild(button);
+				tarefa.insertBefore(form,tarefa[0])
+			}
+
+			function concluir(id_tarefa){
+				let form = document.getElementById("concluir_tarefa_" + id_tarefa)
+				form.submit();
+				console.log(form);
+			}
+			function excluir(id_tarefa){
+				let form = document.getElementById("excluir_tarefa_" + id_tarefa)
+				form.submit();
+				console.log(form);
+			}
+
+			function validar(){
+				let input = document.getElementById('tarefa');
+				if(input.value == ''){
+					alert("Falta preencher a descrição da tarefa");
+					input.focus();
+					return false;
+				}
+				return true;
+			}
+
+		</script>
+	</head>
+	
+	<body>
+	<nav class="navbar navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+					App Lista Tarefas
+				</a>
+			</div>
+		</nav>
+		<?= $this->content() ?>
+	</body>
+
+</html>
