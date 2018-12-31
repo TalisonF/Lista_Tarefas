@@ -1,7 +1,7 @@
 # Lista_Tarefas
 Projeto de lista de tarefas feito em PHP utilizando o padrão de projeto MVC.
 
-#Como testar
+# Como testar
 Para testar a aplicação basta subir o servidor na pasta public da aplicação. 
 E fazer as alterações necessárias no arquivo "Connection.php" para o seu banco de dados. 
 E criar as tabelas a seguir:
